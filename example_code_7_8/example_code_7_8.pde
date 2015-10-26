@@ -13,11 +13,11 @@ void setup() {
   colorMode(HSB, 360, 100, 100, 100);
   //fill arrays with values
   for (int i = 0; i < count; i++) {
-    x[i] = random(width*.25, width*.75);
-    y[i] = random(height*.25, height*.75);
+    diam[i] = random(5, 100);
+    x[i] = random(diam[i], width-diam[i]);
+    y[i] = random(diam[i], height-diam[i]);
     dX[i] = random(-3, 3);
     dY[i] = random(-3, 3);
-    diam[i] = random(5, 100);
     hue[i] = random(360);
   }
 }
@@ -45,6 +45,10 @@ void draw() {
 
     if (y[i] > height || y[i] < 0) {
       dY[i] *= -1;
+    }
+    hue[i] += 1;
+    if (hue[i] > 360) {
+      hue[i] = 0;
     }
   }
 }
