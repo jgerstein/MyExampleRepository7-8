@@ -10,9 +10,14 @@ void setup() {
 
 void draw() {
   background(0);
+  //draw ellipse
   ellipse(x, y, diam, diam);
+
+  //move ellipse
   x += dX;
   y += dY;
+
+  //bounce off walls
   if (x > width || x < 0) {
     dX *= -1;
   }
