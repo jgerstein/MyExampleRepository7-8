@@ -1,4 +1,6 @@
 int count = 150;
+int maxSize = 50;
+int minSize = 5;
 
 //create arrays
 float[] x = new float[count];
@@ -7,18 +9,20 @@ float[] dX = new float[count];
 float[] dY = new float[count];
 float[] diam = new float[count];
 float[] hue = new float[count];
+float[] diamChange = new float[count];
 
 void setup() {
   size(800, 600);
   colorMode(HSB, 360, 100, 100, 100);
   //fill arrays with values
   for (int i = 0; i < count; i++) {
-    diam[i] = random(5, 100);
+    diam[i] = random(minSize, maxSize);
     x[i] = random(diam[i], width-diam[i]);
     y[i] = random(diam[i], height-diam[i]);
     dX[i] = random(-3, 3);
     dY[i] = random(-3, 3);
     hue[i] = random(360);
+    diamChange[i] = random(-1, 1);
   }
 }
 
@@ -31,6 +35,10 @@ void draw() {
     //draw ellipse
     ellipse(x[i], y[i], diam[i], diam[i]);
 
+    diam[i] += diamChange[i];
+    if (diam[i] > maxSize || diam[i] < minSize) {
+      diamChange[i] *= -1;
+    }
 
     //move ellipse
     x[i] += dX[i];
