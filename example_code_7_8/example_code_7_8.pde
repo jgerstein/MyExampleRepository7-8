@@ -6,9 +6,11 @@ float[] y = new float[count];
 float[] dX = new float[count];
 float[] dY = new float[count];
 float[] diam = new float[count];
+float[] hue = new float[count];
 
 void setup() {
   size(800, 600);
+  colorMode(HSB, 360, 100, 100, 100);
   //fill arrays with values
   for (int i = 0; i < count; i++) {
     x[i] = random(width*.25, width*.75);
@@ -16,13 +18,16 @@ void setup() {
     dX[i] = random(-3, 3);
     dY[i] = random(-3, 3);
     diam[i] = random(5, 100);
+    hue[i] = random(360);
   }
 }
 
 void draw() {
-  background(0);
+  background(0, 0, 100);
   //go through arrays, and for each spot in the list, display, move, and bounce a ball
   for (int i = 0; i < count; i++) {
+    fill(hue[i], 100, 100, 50);
+    stroke(hue[i], 100, 80, 100);
     //draw ellipse
     ellipse(x[i], y[i], diam[i], diam[i]);
 
